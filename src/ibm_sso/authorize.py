@@ -55,15 +55,16 @@ security = HTTPBearer()
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
     '''Protect RESTful API'''
     logger.debug(f'credentials: {credentials.credentials}')
-    return sso_ibm_get_user_info(credentials.credentials)
+    result = sso_ibm_get_user_info(credentials.credentials)
+    return UserInfoVO.model_validate(result)
 
 
 @authorize_router.get('/userinfo', response_model=UserInfoVO)
-async def get_userinfo(user_info: dict = Depends(get_current_user)):
+async def get_userinfo(user_info: UserInfoVO = Depends(get_current_user)):
     # curl -k GET 'https://localhost:5000/oauth2/userinfo' \
     # --header 'Authorization: Bearer access_token'
     # result = sso_ibm_get_user_info(token)
-    return UserInfoVO.model_validate(user_info)
+    return user_info
 
 
 @authorize_router.get('/login')
