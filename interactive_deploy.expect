@@ -1,0 +1,14 @@
+#!/usr/bin/expect -f
+
+set PYPI_TEST_IBM_SSO_USERNAME "__token__"
+set PYPI_TEST_IBM_SSO_PASSWORD $env(PYPI_TEST_IBM_SSO_PASSWORD)
+
+spawn ./interactive_deploy.sh
+
+expect "Enter your username: "
+send "$PYPI_TEST_IBM_SSO_USERNAME\r"
+
+expect "Enter your password: "
+send "$PYPI_TEST_IBM_SSO_PASSWORD\r"
+
+expect eof
