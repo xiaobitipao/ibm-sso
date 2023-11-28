@@ -120,7 +120,7 @@ async def refresh_token(refresh_token: str):
     description='''Get user info.<br/><br/>
         👇<br/>
         <strong><i>
-        Users log in through sso and can directly click 
+        For sso authentication, you can directly click 
         <a href='https://localhost:5000/oauth2/login?redirect=https://localhost:3000/example' target='_blank'>Login with SSO</a>
         </i></strong>
         ''',
