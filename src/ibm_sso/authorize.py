@@ -10,8 +10,6 @@ from starlette.config import Config
 from starlette.requests import Request
 from starlette.responses import HTMLResponse, RedirectResponse
 
-from ibm_sso.dto.TokenDTO import TokenDTO
-from ibm_sso.enums.TokenTypeHintEnum import TokenTypeHintEnum
 from ibm_sso.service.sso_ibm_service import sso_ibm_get_user_info
 from ibm_sso.vo.UserInfoVO import AuthorizeInfoVO, TokenInfoVO, UserInfoVO
 

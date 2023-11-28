@@ -3,6 +3,7 @@ import os
 import requests
 from authlib.integrations.base_client.errors import OAuthError
 from dotenv import load_dotenv
+from starlette import status
 
 load_dotenv()
 
@@ -37,7 +38,7 @@ W3ID_ACCESS_TOKEN_URL = os.getenv('W3ID_ACCESS_TOKEN_URL')
 #     )
 
 #     result = response.json()
-#     if (response.status_code == 200):
+#     if (response.status_code == status.HTTP_200_OK):
 #         return result
 #     else:
 #         raise OAuthError(error=result['error_description'])
@@ -65,7 +66,7 @@ def sso_ibm_refresh_access_token_by_refresh_token(refresh_token: str):
     )
 
     result = response.json()
-    if (response.status_code == 200):
+    if (response.status_code == status.HTTP_200_OK):
         return result
     else:
         raise OAuthError(error=result['error'])
@@ -92,7 +93,7 @@ def sso_ibm_get_user_info(access_token: str):
     )
 
     result = response.json()
-    if (response.status_code == 200):
+    if (response.status_code == status.HTTP_200_OK):
         return result
     else:
         raise OAuthError(error=result['error'])
@@ -123,7 +124,7 @@ def sso_ibm_verify_access_token(access_token: str):
     )
 
     result = response.json()
-    if (response.status_code == 200):
+    if (response.status_code == status.HTTP_200_OK):
         if not result['active']:
             raise OAuthError(error=result['error'])
     else:
