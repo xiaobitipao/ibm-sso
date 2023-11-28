@@ -1,5 +1,3 @@
-- [ibm-sso sample](#ibm-sso-sample)
-
 # ibm-sso sample
 
 The sample application uses pipenv as a virtual environment.
@@ -15,7 +13,7 @@ In addition, after the application is started, you can confirm the OpenAPI infor
     W3ID_CLIENT_ID=
     W3ID_CLIENT_SECRET=
     W3ID_ACCESS_TOKEN_URL=https://preprod.login.w3.ibm.com/oidc/endpoint/default/token
-    W3ID_ACCESS_TOKEN_PARAMS=       # Set it if necessary, otherwise just comment it out or delete it.
+    # W3ID_ACCESS_TOKEN_PARAMS=     # Set it if necessary, otherwise just comment it out or delete it.
     W3ID_AUTHORIZE_URL=https://preprod.login.w3.ibm.com/oidc/endpoint/default/authorize
     # W3ID_AUTHORIZE_PARAMS=        # Set it if necessary, otherwise just comment it out or delete it.
     W3ID_API_BASE_URL=https://preprod.login.w3.ibm.com/oidc/endpoint/default
