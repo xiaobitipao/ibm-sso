@@ -1,9 +1,8 @@
 import os
 
 import requests
+from authlib.integrations.base_client.errors import OAuthError
 from dotenv import load_dotenv
-
-from ibm_sso.libs.error import AuthException
 
 load_dotenv()
 
@@ -41,7 +40,7 @@ W3ID_ACCESS_TOKEN_URL = os.getenv('W3ID_ACCESS_TOKEN_URL')
 #     if (response.status_code == 200):
 #         return result
 #     else:
-#         raise AuthException(detail=result['error_description'])
+#         raise OAuthError(error=result['error_description'])
 
 
 def sso_ibm_refresh_access_token_by_refresh_token(refresh_token: str):
@@ -69,7 +68,7 @@ def sso_ibm_refresh_access_token_by_refresh_token(refresh_token: str):
     if (response.status_code == 200):
         return result
     else:
-        raise AuthException(detail=result['error'])
+        raise OAuthError(error=result['error'])
 
 
 def sso_ibm_get_user_info(access_token: str):
@@ -96,7 +95,7 @@ def sso_ibm_get_user_info(access_token: str):
     if (response.status_code == 200):
         return result
     else:
-        raise AuthException(detail=result['error'])
+        raise OAuthError(error=result['error'])
 
 
 def sso_ibm_verify_access_token(access_token: str):
@@ -126,6 +125,6 @@ def sso_ibm_verify_access_token(access_token: str):
     result = response.json()
     if (response.status_code == 200):
         if not result['active']:
-            raise AuthException(detail=result['error'])
+            raise OAuthError(error=result['error'])
     else:
-        raise AuthException(detail=result['error'])
+        raise OAuthError(error=result['error'])
