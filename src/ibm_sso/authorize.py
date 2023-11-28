@@ -83,8 +83,8 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(
 @authorize_router.post(
     '/revoke',
     description='''Revoke access_token or refresh_token.<br/><br/>
+        👇<br/>
         <strong><i>
-        ⚠️<br/>
         If the access token is revoked, the refresh token will not be revoked and can continue to be used.<br/>
         If the refresh token is revoked, the access token will also be revoked at the same time.
         </i></strong>
@@ -115,7 +115,18 @@ async def refresh_token(refresh_token: str):
     return TokenInfoVO.model_validate(result)
 
 
-@authorize_router.get('/userinfo', description='Get user info.', summary='Get user info', response_model=UserInfoVO)
+@authorize_router.get(
+    '/userinfo',
+    description='''Get user info.<br/><br/>
+        👇<br/>
+        <strong><i>
+        Users log in through sso and can directly click 
+        <a href='https://localhost:5000/oauth2/login?redirect=https://localhost:3000/example' target='_blank'>Login with SSO</a>
+        </i></strong>
+        ''',
+    summary='Get user info',
+    response_model=UserInfoVO
+)
 async def get_userinfo(user_info: UserInfoVO = Depends(get_current_user)):
     # curl -k GET 'https://localhost:5000/oauth2/userinfo' \
     # --header 'Authorization: Bearer access_token'
@@ -123,7 +134,7 @@ async def get_userinfo(user_info: UserInfoVO = Depends(get_current_user)):
     return user_info
 
 
-@authorize_router.get('/login')
+@authorize_router.get('/login', include_in_schema=False)
 async def login(request: Request, redirect: str = Query(...)):
 
     request.session['redirect'] = redirect
@@ -132,7 +143,7 @@ async def login(request: Request, redirect: str = Query(...)):
     return await w3id.authorize_redirect(request, redirect_uri)
 
 
-@authorize_router.get('/authorize')
+@authorize_router.get('/authorize', include_in_schema=False)
 async def auth(request: Request):
     try:
         token = await w3id.authorize_access_token(request)
