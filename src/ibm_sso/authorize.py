@@ -11,6 +11,7 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse, RedirectResponse
 
 from ibm_sso.service.sso_ibm_service import sso_ibm_get_user_info
+from ibm_sso.util.const import AVATAR_PREFIX
 from ibm_sso.vo.UserInfoVO import AuthorizeInfoVO, TokenInfoVO, UserInfoVO
 
 authorize_router = APIRouter()
@@ -63,8 +64,6 @@ oauth2_session = OAuth2Session(
 # #########################################################################################
 # Swagger UI: Use the user input(Bearer Token)
 security = HTTPBearer()
-
-AVATAR_PREFIX = 'https://w3-unifiedprofile-api.dal1a.cirrus.ibm.com/v3/image/'
 
 
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
@@ -159,5 +158,6 @@ async def auth(request: Request):
 
     # param = json.dumps(token)
     token_info = AuthorizeInfoVO.model_validate(token)
+    token_info.user_info.avatar = AVATAR_PREFIX + token_info.user_info.uid
     redirect = request.session['redirect']
     return RedirectResponse(url=f'{redirect}?response={token_info.model_dump_json()}')
