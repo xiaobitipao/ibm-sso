@@ -16,6 +16,8 @@ class UserInfoVO(BaseModel):
     display_name: str = Field(validation_alias='displayName')
     email_address: str = Field(validation_alias='emailAddress')
     uid: str
+    # 'https://w3-unifiedprofile-api.dal1a.cirrus.ibm.com/v3/image/' + uid
+    avatar: str = ''
 
 
 class TokenInfoVO(BaseModel):
@@ -49,4 +51,5 @@ if __name__ == '__main__':
         'uid': 'uid',
     }
     result = UserInfoVO.model_validate(data)
+    result.avatar = 'https://w3-unifiedprofile-api.dal1a.cirrus.ibm.com/v3/image/' + result.uid
     print(result)

@@ -64,11 +64,15 @@ oauth2_session = OAuth2Session(
 # Swagger UI: Use the user input(Bearer Token)
 security = HTTPBearer()
 
+AVATAR_PREFIX = 'https://w3-unifiedprofile-api.dal1a.cirrus.ibm.com/v3/image/'
+
 
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
     '''Protect RESTful API'''
     result = sso_ibm_get_user_info(credentials.credentials)
-    return UserInfoVO.model_validate(result)
+    userInfoVO = UserInfoVO.model_validate(result)
+    userInfoVO.avatar = AVATAR_PREFIX + userInfoVO.uid
+    return userInfoVO
 
 
 # TODO: CSIAQ0158E The [authorization_grant] of type [authorization_code] does not exist or is invalid.
