@@ -58,10 +58,18 @@ There is a sample in the `sample` directory that can be run directly. You can st
 
 ## Deploy project(memo for developer)
 
-```bash
-# https://test.pypi.org/
-expect interactive_deploy_test.expect
+1. Deploy project
 
-# https://pypi.org/
-# expect interactive_deploy.expect
-```
+    ```bash
+    # https://test.pypi.org/
+    expect interactive_deploy_test.expect
+
+    # https://pypi.org/
+    # expect interactive_deploy.expect
+    ```
+
+2. Use `test.pypi.org`
+
+    ```bash
+    pipenv install  -i https://test.pypi.org/simple/ ibm-sso
+    ```

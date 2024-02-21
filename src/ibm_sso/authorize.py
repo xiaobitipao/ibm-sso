@@ -11,9 +11,9 @@ from starlette.config import Config
 from starlette.requests import Request
 from starlette.responses import HTMLResponse, RedirectResponse
 
+from ibm_sso.service.ibm_sso_service import ibm_sso_get_user_info
 from ibm_sso.util.const import AVATAR_PREFIX
 from ibm_sso.vo.UserInfoVO import AuthorizeInfoVO, TokenInfoVO, UserInfoVO
-from src.ibm_sso.service.ibm_sso_service import ibm_sso_get_user_info
 
 authorize_router = APIRouter()
 
