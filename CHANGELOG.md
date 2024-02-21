@@ -18,3 +18,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 **Added**
 
 -   Add avatar to UserInfoVO when the user authenticates.
+
+## [0.0.4] - 2024-02-21
+
+**Fixed**
+
+-   Fixed mismatching_state and invalid_grant error.
