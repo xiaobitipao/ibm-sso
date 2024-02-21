@@ -3,6 +3,7 @@ import os
 from authlib.integrations.base_client.errors import OAuthError
 from authlib.integrations.requests_client import OAuth2Session
 from authlib.integrations.starlette_client import OAuth
+from authlib.integrations.starlette_client.apps import StarletteOAuth2App
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, Query, Security
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -10,9 +11,9 @@ from starlette.config import Config
 from starlette.requests import Request
 from starlette.responses import HTMLResponse, RedirectResponse
 
-from ibm_sso.service.sso_ibm_service import sso_ibm_get_user_info
 from ibm_sso.util.const import AVATAR_PREFIX
 from ibm_sso.vo.UserInfoVO import AuthorizeInfoVO, TokenInfoVO, UserInfoVO
+from src.ibm_sso.service.ibm_sso_service import ibm_sso_get_user_info
 
 authorize_router = APIRouter()
 
@@ -24,7 +25,7 @@ W3ID_ACCESS_TOKEN_URL = os.getenv('W3ID_ACCESS_TOKEN_URL')
 W3ID_ENDPOINT_DISCOVERY = os.getenv('W3ID_ENDPOINT_DISCOVERY')
 W3ID_ENDPOINT_REVOCATION = os.getenv('W3ID_ENDPOINT_REVOCATION')
 
-# Get environment variable information by default
+# Get environment variable information by default(.env)
 config = Config()
 
 # Create an authentication server instance based on the configuration
@@ -32,7 +33,7 @@ config = Config()
 # from authlib.integrations.starlette_client.apps import StarletteOAuth2App
 # class: authlib.integrations.starlette_client.apps.StarletteOAuth2App
 oauth = OAuth(config)
-w3id = oauth.register(
+w3id: StarletteOAuth2App = oauth.register(
     name='w3id',
     server_metadata_url=W3ID_ENDPOINT_DISCOVERY,
     client_kwargs={
@@ -43,23 +44,11 @@ w3id = oauth.register(
 
 # Create OAuth2Session instance
 oauth2_session = OAuth2Session(
-    W3ID_CLIENT_ID,
-    W3ID_CLIENT_SECRET,
+    client_id=W3ID_CLIENT_ID,
+    client_secret=W3ID_CLIENT_SECRET,
     scope='openid',
 )
 
-
-# #########################################################################################
-# Swagger UI: Use the user input(username/password) to perform login processing through the endpoint(/token)
-# from fastapi.security import OAuth2PasswordBearer
-# oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
-
-# async def get_current_user(token: str = Depends(oauth2_scheme)):
-#     '''Protect RESTful API'''
-#     # sso_ibm_verify_access_token(token)
-#     # return token
-#     user_info = sso_ibm_get_user_info(token)
-#     return user_info
 
 # #########################################################################################
 # Swagger UI: Use the user input(Bearer Token)
@@ -68,7 +57,7 @@ security = HTTPBearer()
 
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
     '''Protect RESTful API'''
-    result = sso_ibm_get_user_info(credentials.credentials)
+    result = ibm_sso_get_user_info(credentials.credentials)
     userInfoVO = UserInfoVO.model_validate(result)
     userInfoVO.avatar = AVATAR_PREFIX + userInfoVO.uid
     return userInfoVO
@@ -77,7 +66,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(
 # TODO: CSIAQ0158E The [authorization_grant] of type [authorization_code] does not exist or is invalid.
 # @authorize_router.post('/token', description='Get an access token by code.', summary='Obtain an Access Token', response_model=TokenInfoVO)
 # async def get_token(dto: TokenDTO):
-#     result = sso_ibm_get_access_token_by_code(dto.code, dto.redirect_uri)
+#     result = ibm_sso_get_access_token_by_code(dto.code, dto.redirect_uri)
 #     return TokenInfoVO.model_validate(result)
 
 
@@ -108,7 +97,6 @@ async def revoke_token(token: str):
     response_model=TokenInfoVO
 )
 async def refresh_token(refresh_token: str):
-    # result = sso_ibm_refresh_access_token_by_refresh_token(refresh_token)
     result = oauth2_session.refresh_token(
         W3ID_ACCESS_TOKEN_URL,
         refresh_token=refresh_token,
@@ -131,7 +119,7 @@ async def refresh_token(refresh_token: str):
 async def get_userinfo(user_info: UserInfoVO = Depends(get_current_user)):
     # curl -k GET 'https://localhost:5000/oauth2/userinfo' \
     # --header 'Authorization: Bearer access_token'
-    # result = sso_ibm_get_user_info(token)
+    # result = ibm_sso_get_user_info(token)
     return user_info
 
 
