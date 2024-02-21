@@ -137,12 +137,15 @@ async def auth(request: Request):
     try:
         token = await w3id.authorize_access_token(request)
     except OAuthError as error:
-        # TODO: Error page
+        if error.error == 'mismatching_state' or error.error == 'invalid_grant':
+            # If errors like invalid_grant or mismatching_state occur, jump to the redirect url and re-authenticate.
+            return RedirectResponse(url=f"{request.session['redirect']}")
+        # Return error page
         return HTMLResponse(f'<h1>{error.error}</h1>')
 
-    user = token.get('userinfo')
-    if user:
-        request.session['user'] = dict(user)
+    # user = token.get('userinfo')
+    # if user:
+    #     request.session['user'] = dict(user)
 
     # param = json.dumps(token)
     token_info = AuthorizeInfoVO.model_validate(token)
