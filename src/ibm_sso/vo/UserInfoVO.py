@@ -8,10 +8,8 @@
 # https://www.youtube.com/watch?app=desktop&v=Z0a0Vjd992I
 
 from pydantic import BaseModel, Field
-from pydantic.dataclasses import dataclass
 
 
-@dataclass(config=dict(populate_by_name=True))
 class UserInfoVO(BaseModel):
     display_name: str = Field(validation_alias='displayName')
     email_address: str = Field(validation_alias='emailAddress')
@@ -31,7 +29,6 @@ class TokenInfoVO(BaseModel):
     expires_at: int
 
 
-@dataclass(config=dict(populate_by_name=True))
 class AuthorizeInfoVO(BaseModel):
     access_token: str
     refresh_token: str
