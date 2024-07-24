@@ -7,6 +7,6 @@ echo '# 2. Build package'
 python setup.py sdist bdist_wheel 
 
 echo '# 3. Deploy'
-twine upload --repository pypi dist/*
+twine upload --repository testpypi dist/*
 
 echo '# 4. Done ...'

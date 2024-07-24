@@ -5,4 +5,4 @@ requests==2.31.0
 httpx==0.26.0
 itsdangerous==2.1.2
 uvicorn==0.27.0
-ibm-sso==0.0.4
+ibm-sso==0.0.5
