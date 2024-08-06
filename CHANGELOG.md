@@ -30,3 +30,10 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 **Fixed**
 
 -   Fixed pydantic.errors.PydanticUserError: Cannot create a Pydantic dataclass from UserInfoVO as it is already a Pydantic model.
+
+## [0.1.0] - 2024-08-06
+
+**Updated**
+
+-   Replace token with code and state
+-   Add `/token` and `/introspect` api.
