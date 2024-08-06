@@ -18,11 +18,15 @@ pip install ibm-sso
 
 ## Usage
 
-1. Add `ibm-sso` to `requirements.txt` file
+1. Add `ibm-sso` to `requirements.txt`
 
     ```bash
-    ibm-sso==0.0.1
+    ibm-sso==0.1.0
     ```
+
+    > For versions above `0.1.0`, `code` and `state` are returned after successful authentication. You need to use the `code` and `state` to obtain token information.
+    > 
+    > For versions lower than `0.1.0`, the `token` is returned directly after successful authentication. Since the `token` is returned as the `query param` of the callback, there are security risks. Versions higher than `0.1.0` are recommended.
 
 2. Install `ibm-sso` from `requirements.txt` file
 
@@ -32,29 +36,19 @@ pip install ibm-sso
 
 3. Set environment variables
 
-    Refer to the sample directory.
+    Refer to the [.env.template](./sample/.env.template) in the sample directory.
 
 4. Import `ibm-sso` in startup file
 
-    ```python
-    from starlette.middleware.sessions import SessionMiddleware
+    Refer to the [app.py](./sample/app.py) in the sample directory.
 
-    app = FastAPI()
+5. Protect your API
 
-    @app.exception_handler(OAuthError)
-    async def oauth_error_exception_handler(request, exc: OAuthError):
-        return JSONResponse(content={'detail': exc.error}, status_code=status.HTTP_401_UNAUTHORIZED)
-
-    app.add_middleware(SessionMiddleware, secret_key='Change Me to Random Secret!')
-
-    app.include_router(authorize_router, prefix='/oauth2', tags=['Authorize API'])
-    ```
-
-5. Now, your application has added SSO authentication functionality.
+    If your API requires authentication to access, you can refer to [sample.py](./sample/api/v1/sample.py)
 
 ## Sample
 
-There is a sample in the `sample` directory that can be run directly. You can start from the sample to learn how to use ibm-sso.
+There is a full sample in the `sample` directory that can be run directly. You can start from the sample to learn how to use ibm-sso.
 
 ## Deploy project(memo for developer)
 
@@ -71,5 +65,5 @@ There is a sample in the `sample` directory that can be run directly. You can st
 2. Use `test.pypi.org`
 
     ```bash
-    pipenv install  -i https://test.pypi.org/simple/ ibm-sso
+    pipenv install -i https://test.pypi.org/simple/ ibm-sso
     ```

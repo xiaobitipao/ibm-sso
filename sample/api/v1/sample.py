@@ -1,8 +1,6 @@
-#!/usr/bin/python3
-# -*- coding:utf-8 -*-
-
 from fastapi import APIRouter, Depends
 from fastapi.security import HTTPBearer
+
 from ibm_sso.authorize import get_current_user
 from ibm_sso.vo.UserInfoVO import UserInfoVO
 

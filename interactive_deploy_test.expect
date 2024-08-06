@@ -3,7 +3,7 @@
 set PYPI_TEST_IBM_SSO_USERNAME "__token__"
 set PYPI_TEST_IBM_SSO_PASSWORD $env(PYPI_TEST_IBM_SSO_PASSWORD)
 
-spawn ./interactive_deploy.sh
+spawn ./interactive_deploy_test.sh
 
 expect "Enter your username: "
 send "$PYPI_TEST_IBM_SSO_USERNAME\r"

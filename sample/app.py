@@ -1,14 +1,11 @@
-#!/usr/bin/python3
-# -*- coding:utf-8 -*-
-
+from api.v1 import sample_router
 from authlib.integrations.base_client.errors import OAuthError
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from ibm_sso.authorize import authorize_router
 from starlette import status
 from starlette.middleware.sessions import SessionMiddleware
 
-from api.v1 import sample_router
+from ibm_sso.authorize import authorize_router
 
 # Create FastAPI
 app = FastAPI(

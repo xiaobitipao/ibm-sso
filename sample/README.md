@@ -12,19 +12,10 @@ In addition, after the application is started, you can confirm the OpenAPI infor
     # Depending on the environment, modify the prefix `preprod`
     W3ID_CLIENT_ID=
     W3ID_CLIENT_SECRET=
-    W3ID_ACCESS_TOKEN_URL=https://preprod.login.w3.ibm.com/oidc/endpoint/default/token
-    # W3ID_ACCESS_TOKEN_PARAMS=     # Set it if necessary, otherwise just comment it out or delete it.
-    W3ID_AUTHORIZE_URL=https://preprod.login.w3.ibm.com/oidc/endpoint/default/authorize
-    # W3ID_AUTHORIZE_PARAMS=        # Set it if necessary, otherwise just comment it out or delete it.
-    W3ID_API_BASE_URL=https://preprod.login.w3.ibm.com/oidc/endpoint/default
-    W3ID_USER_INFO_URL=https://preprod.login.w3.ibm.com/oidc/endpoint/default/userinfo
     W3ID_ENDPOINT_DISCOVERY=https://preprod.login.w3.ibm.com/oidc/endpoint/default/.well-known/openid-configuration
-    W3ID_ENDPOINT_JWKS=https://preprod.login.w3.ibm.com/oidc/endpoint/default/jwks
-    W3ID_ENDPOINT_INTROSPECT=https://preprod.login.w3.ibm.com/oidc/endpoint/default/introspect
-    W3ID_ENDPOINT_REVOCATION=https://preprod.login.w3.ibm.com/v1.0/endpoint/default/revoke
     ```
 
-2. Start app
+2. Install dependencies
 
     ```bash
     cd sample
@@ -33,5 +24,12 @@ In addition, after the application is started, you can confirm the OpenAPI infor
 
     pipenv install -r requirements.txt
 
+    # Add ibm_sso to sys.path
+    python sitecustomize_install.py
+    ```
+
+3. Start app
+
+    ```bash
     python app.py
     ```

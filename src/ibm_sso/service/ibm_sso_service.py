@@ -4,16 +4,16 @@ import requests
 from authlib.integrations.base_client.errors import OAuthError
 from dotenv import load_dotenv
 from starlette import status
+from typing_extensions import deprecated
 
 load_dotenv()
 
-W3ID_USER_INFO_URL = os.getenv('W3ID_USER_INFO_URL')
 W3ID_CLIENT_ID = os.getenv('W3ID_CLIENT_ID')
 W3ID_CLIENT_SECRET = os.getenv('W3ID_CLIENT_SECRET')
-W3ID_ENDPOINT_INTROSPECT = os.getenv('W3ID_ENDPOINT_INTROSPECT')
-W3ID_ACCESS_TOKEN_URL = os.getenv('W3ID_ACCESS_TOKEN_URL')
+W3ID_USER_INFO_URL = os.getenv('W3ID_USER_INFO_URL')
 
 
+@deprecated('Use `w3id.userinfo` instead of this function.')
 def ibm_sso_get_user_info(access_token: str):
     '''Get userinfo by access token'''
 
