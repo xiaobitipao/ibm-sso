@@ -23,6 +23,7 @@ async def oauth_error_exception_handler(request, exc: OAuthError):
     return JSONResponse(content={'detail': exc.error}, status_code=status.HTTP_401_UNAUTHORIZED)
 
 
+# Save temporary code & state in session
 app.add_middleware(SessionMiddleware, secret_key='Change Me to Random Secret!')
 
 app.include_router(authorize_router, prefix='/oauth2', tags=['Authorize API'])

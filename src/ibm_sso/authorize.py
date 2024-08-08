@@ -27,20 +27,28 @@ load_dotenv()
 
 W3ID_CLIENT_ID = os.getenv('W3ID_CLIENT_ID')
 W3ID_CLIENT_SECRET = os.getenv('W3ID_CLIENT_SECRET')
-W3ID_ENDPOINT_DISCOVERY = os.getenv('W3ID_ENDPOINT_DISCOVERY')
 
-# Get environment variable information by default(.env)
+# Load configuration from environment
+#
+# If env_file is not specified, `.env` is used by default.
+# If neither is specified, it will be read from the environment.
 config = Config()
 
-# Create an authentication server instance based on the configuration
-#
-# from authlib.integrations.starlette_client.apps import StarletteOAuth2App
-# class: authlib.integrations.starlette_client.apps.StarletteOAuth2App
+# Create an OAuth instance based on the configuration
 oauth = OAuth(config)
+
+# Register a remote application on the OAuth registry via oauth.register method.
+#
+# It will load W3ID_CLIENT_ID, W3ID_CLIENT_SECRET and other information starting with `W3ID_` from the environment.
+# Where `W3ID` is the uppercase copy of the name specified in name param.
+#
+# In the `oauth.register` method, any information starting with `W3ID_` read from the environment will be copied to the oauth.register's kwargs.
 w3id: StarletteOAuth2App = oauth.register(
     name='w3id',
-    server_metadata_url=W3ID_ENDPOINT_DISCOVERY,
     client_kwargs={
+        # https://docs.authlib.org/en/latest/oauth/2/intro.html#client-authentication-methods
+        # 'token_endpoint_auth_method': 'client_secret_basic',
+        # 'token_placement': 'header',
         'scope': 'openid profile email'
     }
 )

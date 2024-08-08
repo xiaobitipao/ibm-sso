@@ -12,7 +12,7 @@ In addition, after the application is started, you can confirm the OpenAPI infor
     # Depending on the environment, modify the prefix `preprod`
     W3ID_CLIENT_ID=
     W3ID_CLIENT_SECRET=
-    W3ID_ENDPOINT_DISCOVERY=https://preprod.login.w3.ibm.com/oidc/endpoint/default/.well-known/openid-configuration
+    W3ID_SERVER_METADATA_URL=https://preprod.login.w3.ibm.com/oidc/endpoint/default/.well-known/openid-configuration
     ```
 
 2. Install dependencies
