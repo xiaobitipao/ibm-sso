@@ -37,3 +37,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 -   Replace token with code and state
 -   Add `/token` and `/introspect` api.
+
+## [0.1.1] - 2024-08-08
+
+**Updated**
+
+-   Modify the environment from `W3ID_ENDPOINT_DISCOVERY` to `W3ID_SERVER_METADATA_URL`

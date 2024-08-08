@@ -21,7 +21,7 @@ pip install ibm-sso
 1. Add `ibm-sso` to `requirements.txt`
 
     ```bash
-    ibm-sso==0.1.0
+    ibm-sso==0.1.1
     ```
 
     > For versions above `0.1.0`, `code` and `state` are returned after successful authentication. You need to use the `code` and `state` to obtain token information.
