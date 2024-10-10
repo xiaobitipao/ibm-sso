@@ -7,7 +7,8 @@
 from typing import Optional
 
 from pydantic import BaseModel, Field
-from util.const import AVATAR_PREFIX
+
+from ibm_sso.util.const import AVATAR_PREFIX
 
 
 class UserInfoVO(BaseModel):
