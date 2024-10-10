@@ -43,3 +43,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 **Updated**
 
 -   Modify the environment from `W3ID_ENDPOINT_DISCOVERY` to `W3ID_SERVER_METADATA_URL`
+
+## [0.1.2] - 2024-10-09
+
+**Fixed**
+
+-   Fixed ModuleNotFoundError: No module named 'util'.
