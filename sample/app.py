@@ -1,9 +1,9 @@
 from api.v1 import sample_router
 from authlib.integrations.base_client.errors import OAuthError
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette import status
-from starlette.middleware.sessions import SessionMiddleware
 
 from ibm_sso.authorize import authorize_router
 
@@ -23,8 +23,17 @@ async def oauth_error_exception_handler(request, exc: OAuthError):
     return JSONResponse(content={'detail': exc.error}, status_code=status.HTTP_401_UNAUTHORIZED)
 
 
-# Save temporary code & state in session
-app.add_middleware(SessionMiddleware, secret_key='Change Me to Random Secret!')
+@app.exception_handler(Exception)
+async def exception_handler(request, exc: Exception):
+    return JSONResponse(content={'detail': exc.args}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 app.include_router(authorize_router, prefix='/oauth2', tags=['Authorize API'])
 app.include_router(sample_router, prefix='/sample', tags=['Sample API'])

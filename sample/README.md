@@ -20,7 +20,7 @@ In addition, after the application is started, you can confirm the OpenAPI infor
     ```bash
     cd sample
 
-    pipenv shell
+    pipenv --python 3.11 shell
 
     pipenv install -r requirements.txt
 

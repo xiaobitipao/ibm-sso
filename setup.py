@@ -6,7 +6,7 @@ def read_files(files):
     for file in files:
         with open(file, encoding='utf-8') as f:
             data.append(f.read())
-    return "\n".join(data)
+    return '\n'.join(data)
 
 
 long_description = read_files(['README.md', 'CHANGELOG.md'])
@@ -27,6 +27,14 @@ setup(
     keywords=['sso', 'fastapi', 'oidc'],
     packages=find_packages('src'),    # include all packages under src
     package_dir={'': 'src'},          # tell distutils packages are under src
+    install_requires=[
+        'python-dotenv>=1.0.1',
+        'fastapi>=0.112.0',
+        'authlib>=1.3.0',
+        'requests>=2.32.2',
+        'httpx>=0.27.0',
+        'uvicorn>=0.30.0',
+    ],
     python_requires='>=3.10',
     license='BSD-3-Clause',
     classifiers=[

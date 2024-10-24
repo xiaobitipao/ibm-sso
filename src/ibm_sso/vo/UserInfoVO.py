@@ -19,7 +19,7 @@ class UserInfoVO(BaseModel):
 
     def __init__(self, **data):
         super().__init__(**data)
-        self.avatar = AVATAR_PREFIX + self.uid
+        self.avatar = AVATAR_PREFIX + self.uid if self.uid else ''
 
 
 class TokenInfoVO(BaseModel):

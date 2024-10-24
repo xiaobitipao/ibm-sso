@@ -5,15 +5,14 @@ name = "pypi"
 
 [packages]
 python-dotenv = "==1.0.1"
-fastapi = "==0.115.0"
+fastapi = "==0.115.2"
 authlib = "==1.3.2"
 requests = "==2.32.2"
-httpx = "==0.26.0"
-itsdangerous = "==2.2.0"
-uvicorn = "==0.31.0"
-aiohttp = {extras = ["speedups"], version = "==3.10.9"}
+uvicorn = "==0.32.0"
+httpx = "==0.27.2"
 
 [dev-packages]
 
 [requires]
 python_version = "3.11"
+python_full_version = "3.11.4"
