@@ -11,7 +11,6 @@ from authlib.integrations.starlette_client import OAuth
 from authlib.integrations.starlette_client.apps import StarletteOAuth2App
 from authlib.oidc.core.claims import UserInfo
 from dotenv import load_dotenv
-from dto.TokenDTO import IntrospectTokenDTO, RefreshTokenDTO, RevokeTokenDTO
 from fastapi import APIRouter, Depends, HTTPException, Query, Security
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -22,6 +21,8 @@ from starlette.config import Config
 from starlette.requests import Request
 from starlette.responses import HTMLResponse, RedirectResponse
 
+from ibm_sso.dto.TokenDTO import (IntrospectTokenDTO, RefreshTokenDTO,
+                                  RevokeTokenDTO)
 from ibm_sso.vo.UserInfoVO import AuthorizeInfoVO, TokenInfoVO, UserInfoVO
 
 authorize_router = APIRouter()
