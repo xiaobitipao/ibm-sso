@@ -21,14 +21,12 @@ pip install ibm-sso
 1. Add `ibm-sso` to `requirements.txt`
 
     ```bash
-    ibm-sso==0.2.1
+    ibm-sso==0.3.0
     ```
 
-    > For versions lower than `0.1.0`, the `token` is returned directly after successful authentication.
+    > For versions lower than `0.3.0`, the `token` is returned directly after successful authentication.
     > 
-    > For versions `0.1.x` is experimental, please do not use it.
-    > 
-    > Starting from version `0.2.1`, you need to create your own `nonce` on the client side and then pass that `nonce` along with the `redirect_uri` to the server side. `code` and `state` are returned after successful authentication. You need to use the `code`, `state`, `nonce` and `redirect_uri` to obtain token information.
+    > Starting from version `0.3.0`, you need to create your own `nonce` on the client side and then pass that `nonce` along with the `redirect_uri` to the server side. `code` and `state` are returned after successful authentication. You need to use the `code`, `state`, `nonce` and `redirect_uri` to obtain token information.
 
 2. Install `ibm-sso` from `requirements.txt` file
 

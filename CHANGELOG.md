@@ -31,33 +31,14 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 -   Fixed pydantic.errors.PydanticUserError: Cannot create a Pydantic dataclass from UserInfoVO as it is already a Pydantic model.
 
-## [0.1.0] - 2024-08-06
+## [0.3.0] - 2024-10-24
 
 **Updated**
 
 -   Replace token with code and state
+
 -   Add `/token` and `/introspect` api.
-
-## [0.1.1] - 2024-08-08
-
-**Updated**
 
 -   Modify the environment from `W3ID_ENDPOINT_DISCOVERY` to `W3ID_SERVER_METADATA_URL`
 
-## [0.1.2] - 2024-10-09
-
-**Fixed**
-
--   Fixed ModuleNotFoundError: No module named 'util'.
-
-## [0.2.0] - 2024-10-24
-
-**Updated**
-
 -   Use AsyncOAuth2Client to replace OAuth2Session.
-
-## [0.2.1] - 2024-10-24
-
-**Fixed**
-
--   Fixed ModuleNotFoundError: No module named 'dto'.
