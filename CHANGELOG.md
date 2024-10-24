@@ -55,3 +55,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 **Updated**
 
 -   Use AsyncOAuth2Client to replace OAuth2Session.
+
+## [0.2.1] - 2024-10-24
+
+**Fixed**
+
+-   Fixed ModuleNotFoundError: No module named 'dto'.
