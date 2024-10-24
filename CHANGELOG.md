@@ -49,3 +49,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 **Fixed**
 
 -   Fixed ModuleNotFoundError: No module named 'util'.
+
+## [0.2.0] - 2024-10-24
+
+**Updated**
+
+-   Use AsyncOAuth2Client to replace OAuth2Session.

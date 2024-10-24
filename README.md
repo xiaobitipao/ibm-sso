@@ -21,12 +21,14 @@ pip install ibm-sso
 1. Add `ibm-sso` to `requirements.txt`
 
     ```bash
-    ibm-sso==0.1.2
+    ibm-sso==0.2.0
     ```
 
-    > For versions above `0.1.0`, `code` and `state` are returned after successful authentication. You need to use the `code` and `state` to obtain token information.
+    > For versions lower than `0.1.0`, the `token` is returned directly after successful authentication.
     > 
-    > For versions lower than `0.1.0`, the `token` is returned directly after successful authentication. Since the `token` is returned as the `query param` of the callback, there are security risks. Versions higher than `0.1.0` are recommended.
+    > For versions `0.1.x` is experimental, please do not use it.
+    > 
+    > Starting from version `0.2.0`, you need to create your own `nonce` on the client side and then pass that `nonce` along with the `redirect_uri` to the server side. `code` and `state` are returned after successful authentication. You need to use the `code`, `state`, `nonce` and `redirect_uri` to obtain token information.
 
 2. Install `ibm-sso` from `requirements.txt` file
 
@@ -48,7 +50,7 @@ pip install ibm-sso
 
 ## Sample
 
-There is a full sample in the `sample` directory that can be run directly. You can start from the sample to learn how to use ibm-sso.
+There is a full sample in the `sample` directory that can be run directly. You can start from the sample to learn how to use `ibm-sso`.
 
 ## Deploy project(memo for developer)
 
@@ -66,4 +68,10 @@ There is a full sample in the `sample` directory that can be run directly. You c
 
     ```bash
     pipenv install -i https://test.pypi.org/simple/ ibm-sso
+    ```
+
+3. How to mark a version as yanked
+
+    ```bash
+    twine yank <package_name> --version <version> --reason "Reason this release was yanked: Yanked due to <reason>"
     ```
