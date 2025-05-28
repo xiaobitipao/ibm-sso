@@ -48,8 +48,9 @@ app.add_middleware(
 @app.middleware("http")
 async def add_middleware_process_time_header(request: Request, call_next):
 
-    user_info: UserInfoMiddleWareVO = await get_current_user_for_middleware(request)
-    print(f"display_name={user_info.display_name}")
+    if request.url.path not in ["/oauth2/login", "/oauth2/token"]:
+        user_info: UserInfoMiddleWareVO = await get_current_user_for_middleware(request)
+        print(f"Login user is: {user_info.email_address}")
 
     response = await call_next(request)
     return response
