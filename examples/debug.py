@@ -8,6 +8,8 @@ load_dotenv()
 
 # ################################################################################
 # Add ibm-sso
+# 
+# If you installed ibm-sso via pip, the following code is not needed.
 # ################################################################################
 
 # Set the project root directory

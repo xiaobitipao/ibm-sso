@@ -22,6 +22,17 @@ class UserInfoVO(BaseModel):
         self.avatar = AVATAR_PREFIX + self.uid if self.uid else ''
 
 
+class UserInfoMiddleWareVO(BaseModel):
+    display_name: Optional[str] = Field(None, alias="displayName")
+    email_address: Optional[str] = Field(None, alias="emailAddress")
+    uid: Optional[str] = None
+    avatar: Optional[str] = None
+
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.avatar = AVATAR_PREFIX + self.uid if self.uid else ""
+
+
 class TokenInfoVO(BaseModel):
     access_token: str
     refresh_token: str
