@@ -1,7 +1,7 @@
 - [ibm-sso](#ibm-sso)
   - [Getting Started](#getting-started)
   - [Usage](#usage)
-  - [Sample](#sample)
+  - [Examples](#examples)
   - [Deploy project(memo for developer)](#deploy-projectmemo-for-developer)
 
 # ibm-sso
@@ -21,34 +21,28 @@ pip install ibm-sso
 1. Add `ibm-sso` to `requirements.txt`
 
     ```bash
-    ibm-sso==0.3.0
+    ibm-sso==0.3.1
     ```
 
     > For versions lower than `0.3.0`, the `token` is returned directly after successful authentication.
     > 
     > Starting from version `0.3.0`, you need to create your own `nonce` on the client side and then pass that `nonce` along with the `redirect_uri` to the server side. `code` and `state` are returned after successful authentication. You need to use the `code`, `state`, `nonce` and `redirect_uri` to obtain token information.
 
-2. Install `ibm-sso` from `requirements.txt` file
+2. Set environment variables
 
-    ```bash
-    pipenv install -r requirements.txt
-    ```
+    Refer to the [.env.template](./examples/.env.template) in the examples directory.
 
-3. Set environment variables
+3. Import `ibm-sso` in startup file
 
-    Refer to the [.env.template](./sample/.env.template) in the sample directory.
+    Refer to the [main.py](./examples/src/main.py) in the examples directory.
 
-4. Import `ibm-sso` in startup file
+4. Protect your API
 
-    Refer to the [app.py](./sample/app.py) in the sample directory.
+    If your API requires authentication to access, you can refer to [example.py](./examples/src/api/v1/example.py)
 
-5. Protect your API
+## Examples
 
-    If your API requires authentication to access, you can refer to [sample.py](./sample/api/v1/sample.py)
-
-## Sample
-
-There is a full sample in the `sample` directory that can be run directly. You can start from the sample to learn how to use `ibm-sso`.
+There is a full example in the `examples` directory that can be run directly. You can start from the example to learn how to use `ibm-sso`.
 
 ## Deploy project(memo for developer)
 
@@ -65,7 +59,7 @@ There is a full sample in the `sample` directory that can be run directly. You c
 2. Use `test.pypi.org`
 
     ```bash
-    pipenv install -i https://test.pypi.org/simple/ ibm-sso
+    pip install -i https://test.pypi.org/simple/ ibm-sso
     ```
 
 3. How to mark a version as yanked

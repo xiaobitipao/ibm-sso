@@ -42,3 +42,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 -   Modify the environment from `W3ID_ENDPOINT_DISCOVERY` to `W3ID_SERVER_METADATA_URL`
 
 -   Use AsyncOAuth2Client to replace OAuth2Session.
+
+## [0.3.1] - 2025-05-28
+
+**Added**
+
+-   Add `get_current_user_for_middleware` for FastAPI middleware.
