@@ -48,3 +48,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 **Added**
 
 -   Add `get_current_user_for_middleware` for FastAPI middleware.
+
+## [0.3.2] - 2025-06-23
+
+**Updated**
+
+-   Update the W3ID avatar prefix. You can also set it using the `W3ID_AVATAR_PREFIX` environment variable.
