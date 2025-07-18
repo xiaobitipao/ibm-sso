@@ -54,3 +54,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 **Updated**
 
 -   Update the W3ID avatar prefix. You can also set it using the `W3ID_AVATAR_PREFIX` environment variable.
+
+## [0.3.3] - 2025-07-18
+
+**Updated**
+
+-   Add a `timeout` parameter to `get_current_user` so that users can specify the timeout.

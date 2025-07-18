@@ -21,7 +21,7 @@ pip install ibm-sso
 1. Add `ibm-sso` to `requirements.txt`
 
     ```bash
-    ibm-sso==0.3.2
+    ibm-sso==0.3.3
     ```
 
     > For versions lower than `0.3.0`, the `token` is returned directly after successful authentication.
