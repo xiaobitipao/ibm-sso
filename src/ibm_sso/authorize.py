@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException, Query, Security
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from httpx import HTTPStatusError
+from httpx import HTTPStatusError, TimeoutException
 from requests.models import Response
 from starlette import status
 from starlette.config import Config
@@ -110,7 +110,7 @@ def __get_access_token(
         )
 
 
-async def get_current_user(access_token: str = Depends(__get_access_token)):
+async def get_current_user(timeout=10, access_token: str = Depends(__get_access_token)):
     """Get current user info.(Also protect RESTful API.)<br/><br/>
 
     W3ID SSO does not provide an API to check whether the token is expired,
@@ -119,11 +119,14 @@ async def get_current_user(access_token: str = Depends(__get_access_token)):
     """
     try:
         result: UserInfo = await w3id.userinfo(
-            token={"access_token": access_token, "token_type": "Bearer"}
+            token={"access_token": access_token, "token_type": "Bearer"},
+            timeout=timeout,
         )
         userInfoVO = UserInfoVO.model_validate(result)
         return userInfoVO
     except HTTPStatusError as e:
+        raise InvalidTokenError()
+    except TimeoutException as e2:
         raise InvalidTokenError()
 
 
