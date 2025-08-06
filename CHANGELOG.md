@@ -60,3 +60,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 **Updated**
 
 -   Add a `timeout` parameter to `get_current_user` so that users can specify the timeout.
+
+## [0.3.4] - 2025-08-06
+
+**Updated**
+
+-   refactor: move `timeout` from parameter to internal variable in `get_current_user`.
