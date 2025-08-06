@@ -24,7 +24,12 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse, RedirectResponse
 
 from ibm_sso.dto.TokenDTO import IntrospectTokenDTO, RefreshTokenDTO, RevokeTokenDTO
-from ibm_sso.vo.UserInfoVO import AuthorizeInfoVO, TokenInfoVO, UserInfoVO, UserInfoMiddleWareVO
+from ibm_sso.vo.UserInfoVO import (
+    AuthorizeInfoVO,
+    TokenInfoVO,
+    UserInfoMiddleWareVO,
+    UserInfoVO,
+)
 
 authorize_router = APIRouter()
 
@@ -110,7 +115,7 @@ def __get_access_token(
         )
 
 
-async def get_current_user(timeout=10, access_token: str = Depends(__get_access_token)):
+async def get_current_user(access_token: str = Depends(__get_access_token)):
     """Get current user info.(Also protect RESTful API.)<br/><br/>
 
     W3ID SSO does not provide an API to check whether the token is expired,
@@ -120,7 +125,7 @@ async def get_current_user(timeout=10, access_token: str = Depends(__get_access_
     try:
         result: UserInfo = await w3id.userinfo(
             token={"access_token": access_token, "token_type": "Bearer"},
-            timeout=timeout,
+            timeout=10,
         )
         userInfoVO = UserInfoVO.model_validate(result)
         return userInfoVO
@@ -137,8 +142,8 @@ async def get_current_user_for_middleware(request: Request):
     If you need to access user information within middleware — for example, to log the currently authenticated user in access logs,
     you should use `get_current_user_for_middleware` instead.<br/><br/>
 
-    Note: In production systems, you generally shouldn't use `get_current_user_for_middleware`. 
-    Instead, you should store `user information` along with their `access_token` and `refresh_token` in `Redis`. 
+    Note: In production systems, you generally shouldn't use `get_current_user_for_middleware`.
+    Instead, you should store `user information` along with their `access_token` and `refresh_token` in `Redis`.
     This approach can significantly improve access speed. <br/>
     The current implementation simply provides a solution that does not rely on Redis.
     """
